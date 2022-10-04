@@ -3,6 +3,28 @@ import re
 import math
 import heapq
 
+def count_pad(x,name):
+    if 5 <= x <= 20 or 5 <= x % 10 <= 9 or x % 10 == 0:
+        if name=='раз':
+            return 'раз'
+        elif name=='ваканси':
+            return 'й'
+        else:
+            return 'рублей'
+    elif x % 10 == 1:
+        if name=='раз':
+            return 'раз'
+        elif name=='ваканси':
+            return 'я'
+        else:
+            return 'рубль'
+    else:
+        if name=='раз':
+            return 'раза'
+        elif name=='ваканси':
+            return 'и'
+        else:
+            return 'рубля'
 file_name="C:\\vacanc.csv"
 #file_name=input()
 File=open(file_name, encoding='utf_8_sig')
@@ -154,7 +176,7 @@ for i in range(len(new_dic_vacancy)):
                 average_salary_number[key]+=1
             else:
                 average_salary_number[key]=1
-print(average_salary_number)
+
 # вывод в формате:  
 # for dic in sorted_best_array:
 #     print(f"{dic['name']} в компании {dic['employer_name']} - {dic['salary_currency']} (г.{dic['area_name']})")
@@ -169,12 +191,20 @@ print(average_salary_number)
 #         print(f'{key}: {value}')
 #     #print()
 print('Самые высокие зарплаты:')
+i=1
 for dic in sorted_best_array:
-    print(f"{dic['name']} в компании {dic['employer_name']} - {dic['salary_currency']} (г.{dic['area_name']})")
+    if i<=10:
+        pad=count_pad(value,'rub')
+        print(f'''    {i}) {dic['name']} в компании "{dic['employer_name']}" - {dic['salary_currency']} {pad} (г. {dic['area_name']})''')
+    i+=1
 print()
+i=1
 print('Самые низкие зарплаты:')
 for dic in sorted_worst_array:
-    print(f"{dic['name']} в компании {dic['employer_name']} - {dic['salary_currency']} (г.{dic['area_name']})")
+    if i<=10:
+        pad=count_pad(value,'rub')
+        print(f'''    {i}) {dic['name']} в компании "{dic['employer_name']}" - {dic['salary_currency']} {pad} (г. {dic['area_name']})''')
+    i+=1
 print()
 print('Из 10 скиллов, самыми популярными являются:')
 items = list(sorted_skills.items())
@@ -182,7 +212,8 @@ new_sorted_skills = {k: v for k, v in reversed(items)}
 i=1
 for key,value in new_sorted_skills.items():
     if i<=10:
-        print(f'{i}) {key} - упоминается {value}')
+        pad=count_pad(value,'раз')
+        print(f'    {i}) {key} - упоминается {value} {pad}')
     i+=1
 print()
 
@@ -192,6 +223,8 @@ print('Из 10 городов, самые высокие средние ЗП:')
 i=1
 for key,value in new_salary_list.items():
     if i<=10 and value!=0:
-        print(f'{i}) {key} - средняя зарплата  {value} встречается {average_salary_number[key]}')
+        pad=count_pad(value,'rub')
+        num=count_pad(average_salary_number[key],'ваканси')
+        print(f'    {i}) {key} - средняя зарплата  {value} {pad} ({average_salary_number[key]} ваканси{num})')
         i+=1
 print()
