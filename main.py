@@ -25,6 +25,8 @@ for row in filtered:
             ans=clear(row[i])
         dic[titles[i]]=ans
     dic_vacancy.append(dic)
+
+
 #dic_vacancy['key_skills'] это либо массив строк, либо строка
 #в некоторых строках есть траблы: тк сплитили изначально по \n, key_skills остался неотработан по другим знакам
 #нужно сплитить еще раз или это одно значение key_skills?
@@ -37,14 +39,14 @@ for i in range(len(dic_vacancy)):
             new_dic_vacancy.append(dic_vacancy[i])
 #добавим информацию о средней зп. тк размер менять нельзя, храним в ячейке currency
 #rename key?
-for i in range(len(dic_vacancy)):
-    for key, value in dic_vacancy[i].items():
-        dic_vacancy[i]['salary_currency']=math.floor((int(dic_vacancy[i]['salary_from'])+int(dic_vacancy[i]['salary_to']))/2)
+for i in range(len(new_dic_vacancy)):
+    for key, value in new_dic_vacancy[i].items():
+        new_dic_vacancy[i]['salary_currency']=math.floor((int(new_dic_vacancy[i]['salary_from'])+int(new_dic_vacancy[i]['salary_to']))/2)
 
-#cheking
-# for i in range(len(dic_vacancy)):
-#     for key, value in dic_vacancy[i].items():
-#         if type(dic_vacancy[i]['key_skills']).__name__ != 'list':
-#             print(f'{key}: {value}')
-    #print()
-print('OK')
+# cheking
+# for i in range(len(new_dic_vacancy)):
+#     for key, value in new_dic_vacancy[i].items():
+#         print(f'{key}: {value}')
+#     #print()
+# print(len(dic_vacancy))
+# print(len(new_dic_vacancy))
