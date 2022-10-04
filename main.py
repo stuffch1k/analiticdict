@@ -206,10 +206,13 @@ for dic in sorted_worst_array:
         print(f'''    {i}) {dic['name']} в компании "{dic['employer_name']}" - {dic['salary_currency']} {pad} (г. {dic['area_name']})''')
     i+=1
 print()
-print('Из 10 скиллов, самыми популярными являются:')
+
+
 items = list(sorted_skills.items())
 new_sorted_skills = {k: v for k, v in reversed(items)}
 i=1
+count=10 if len(new_sorted_skills)>10 else len(new_sorted_skills)
+print(f'Из {count} скиллов, самыми популярными являются:')
 for key,value in new_sorted_skills.items():
     if i<=10:
         pad=count_pad(value,'раз')
@@ -228,3 +231,4 @@ for key,value in new_salary_list.items():
         print(f'    {i}) {key} - средняя зарплата  {value} {pad} ({average_salary_number[key]} ваканси{num})')
         i+=1
 print()
+print(len(new_sorted_skills))
