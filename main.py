@@ -43,6 +43,31 @@ for i in range(len(new_dic_vacancy)):
     for key, value in new_dic_vacancy[i].items():
         new_dic_vacancy[i]['salary_currency']=math.floor((int(new_dic_vacancy[i]['salary_from'])+int(new_dic_vacancy[i]['salary_to']))/2)
 
+cities_list={}
+cities_count=len(new_dic_vacancy)
+skills={}
+# считаем количесвто городов 
+# парсим скилы и считаем их в словаре
+for i in range(len(new_dic_vacancy)):
+    for key, value in new_dic_vacancy[i].items():
+        if key=='area_name':
+            if value in list(cities_list.keys()):
+                cities_list[value]+=1
+            else:
+                cities_list[value]=1
+        if key=='key_skills':
+            if type(value).__name__ == 'list':
+                for element in new_dic_vacancy[i][key]:
+                    if element in list(skills.keys()):
+                        skills[element]+=1
+                    else:
+                        skills[element]=1
+            else:
+                if new_dic_vacancy[i][key] in list(skills.keys()):
+                        skills[new_dic_vacancy[i][key]]+=1
+                else:
+                    skills[new_dic_vacancy[i][key]]=1
+
 # cheking
 # for i in range(len(new_dic_vacancy)):
 #     for key, value in new_dic_vacancy[i].items():
@@ -50,3 +75,4 @@ for i in range(len(new_dic_vacancy)):
 #     #print()
 # print(len(dic_vacancy))
 # print(len(new_dic_vacancy))
+
