@@ -136,10 +136,10 @@ for dic in worst_salary:
     temp=dic['name']
 # получаем два массива словарей: с лучшими зп и худшими зп
 #сортируем скиллсы по возрастанию-вывод в обратном порядке
-sorted_skills=dict(sorted(skills.items(), key=lambda item: item[1]))
+sorted_skills=dict(sorted(skills.items(), key=lambda item: item[1],reverse=True))
 
-sorted_best_array=sorted(best_array,key=lambda d: d['salary_currency'])
-sorted_best_array.reverse()
+sorted_best_array=sorted(best_array,key=lambda d: d['salary_currency'],reverse=True)
+# sorted_best_array.reverse()
 sorted_worst_array=sorted(worst_array,key=lambda d: d['salary_currency']) 
 
 # приступаем к формированию рейтинга  зп по городам тошько суммируем пока
@@ -213,14 +213,15 @@ new_sorted_skills = {k: v for k, v in reversed(items)}
 i=1
 count=10 if len(new_sorted_skills)>10 else len(new_sorted_skills)
 print(f'Из {count} скиллов, самыми популярными являются:')
-for key,value in new_sorted_skills.items():
+for key,value in sorted_skills.items():
     if i<=10:
         pad=count_pad(value,'раз')
         print(f'    {i}) {key} - упоминается {value} {pad}')
     i+=1
 print()
 
-print('Из 10 городов, самые высокие средние ЗП:')
+count= 10 if len(new_salary_list)>10 else len(new_salary_list)
+print(f'Из {count} городов, самые высокие средние ЗП:')
 # for key,value in cities_list.items():
 #     print(f'{key}-{value}')
 i=1
@@ -228,7 +229,7 @@ for key,value in new_salary_list.items():
     if i<=10 and value!=0:
         pad=count_pad(value,'rub')
         num=count_pad(average_salary_number[key],'ваканси')
-        print(f'    {i}) {key} - средняя зарплата  {value} {pad} ({average_salary_number[key]} ваканси{num})')
+        print(f'    {i}) {key} - средняя зарплата {value} {pad} ({average_salary_number[key]} ваканси{num})')
         i+=1
-print()
-print(len(new_sorted_skills))
+# print()
+# print(len(new_sorted_skills))
